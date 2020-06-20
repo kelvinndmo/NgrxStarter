@@ -1,10 +1,6 @@
-import { Ingredient } from "../../shared/ingredient.model";
-import { Action } from "@ngrx/store";
 import * as ShoppingListActions from "./shopping-list.action";
 
-export interface AppState {
-  shoppingList: State;
-}
+import { Ingredient } from "../../shared/ingredient.model";
 
 export interface State {
   ingridients: Ingredient[];
