@@ -3,10 +3,10 @@ import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
 import { Subscription } from "rxjs";
 
 import { Ingredient } from "../../shared/ingredient.model";
-import { ShoppingListService } from "../shopping-list.service";
 import { Store } from "@ngrx/store";
 import * as ShoppingListActions from "../store/shopping-list.action";
 import * as fromShoppingList from "../store/shopping-list.reducer";
+import * as fromApp from "../../store/app.reducer";
 
 @Component({
   selector: "app-shopping-edit",
@@ -15,14 +15,12 @@ import * as fromShoppingList from "../store/shopping-list.reducer";
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   ShoppingForm: FormGroup;
-  subscription: Subscription;
   editMode = false;
   editedItem: Ingredient;
 
   constructor(
     private fb: FormBuilder,
-    private slService: ShoppingListService,
-    private store: Store<fromShoppingList.AppState>
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
@@ -82,7 +80,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
     this.store.dispatch(new ShoppingListActions.StopEdit());
   }
 }
